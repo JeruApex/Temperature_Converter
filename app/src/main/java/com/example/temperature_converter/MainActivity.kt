@@ -16,39 +16,42 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val convert_button : Button = findViewById(R.id.convert_button)
-        convert_button.setOnClickListener{
+        val convert_button: Button = findViewById(R.id.convert_button)
+        convert_button.setOnClickListener {
 
-            val edit_text_celsius : TextView = findViewById(R.id.edit_text_celsius)
+            val edit_text_celsius: TextView = findViewById(R.id.edit_text_celsius)
             val edit_text_celsius_text = edit_text_celsius.text
 
-            val edit_text_fahrenheit : TextView = findViewById(R.id.edit_text_fahrenheit)
+            val edit_text_fahrenheit: TextView = findViewById(R.id.edit_text_fahrenheit)
             val edit_text_fahrenheit_text = edit_text_fahrenheit.text
 
-            if(edit_text_celsius.hasFocus()){
-                val calculate = ((edit_text_celsius_text.toString().toDouble() *9/5) +32)
-                val calculatedText: CharSequence=calculate.toString()
+//            try {
+
+
+            if (edit_text_celsius.text.toString().isEmpty()) {
+                val calculate = ((edit_text_fahrenheit_text.toString().toDouble() - 32) * 5 / 9)
+                val calculatedText: CharSequence = calculate.toString()
+                edit_text_celsius.text = calculatedText
+            } else if (edit_text_fahrenheit.text.toString().isEmpty()) {
+                val calculate = ((edit_text_celsius_text.toString().toDouble() * 9 / 5) + 32)
+                val calculatedText: CharSequence = calculate.toString()
                 edit_text_fahrenheit.text = calculatedText
             }
 
-            if(edit_text_fahrenheit.hasFocus()){
-                val calculate = ((edit_text_fahrenheit_text.toString().toDouble() -32) *5/9)
-                val calculatedText: CharSequence=calculate.toString()
-                edit_text_celsius.text = calculatedText
+//            } catch (e:NumberFormatException ){Toast.makeText(this,"Enter a number")}
+//        }
+            val resetButton: Button = findViewById(R.id.button2)
+            resetButton.setOnClickListener {
+
+                val edit_text_celsius: TextView = findViewById(R.id.edit_text_celsius)
+
+                val edit_text_fahrenheit: TextView = findViewById(R.id.edit_text_fahrenheit)
+                edit_text_celsius.text = ""
+                edit_text_fahrenheit.text = ""
             }
-
         }
-        val resetButton : Button = findViewById(R.id.button2)
-        resetButton.setOnClickListener{
 
-            val edit_text_celsius : TextView = findViewById(R.id.edit_text_celsius)
-
-            val edit_text_fahrenheit : TextView = findViewById(R.id.edit_text_fahrenheit)
-            edit_text_celsius.text = ""
-            edit_text_fahrenheit.text = ""
-        }
     }
-
 }
 
 
